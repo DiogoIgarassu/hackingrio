@@ -1,0 +1,46 @@
+{% extends "core\base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="pure-g-r content-ribbon">
+    <div class="pure-u-1">
+        <div class="l-box">
+            <br><br>
+            <h4 class="content-subhead">Listagem de Serviços e Produtos</h4>
+            <p>Abaixo a lista dos serviços e produtps disponíveis na plataforma</p>
+        </div>
+    </div>
+</div>
+<br><br>
+{% for service in services %}
+<div class="pure-g-r content-ribbon">
+    <div class="pure-u-1-3">
+        <div class="l-box">
+            <a href="{{ course.get_absolute_url }}">
+            {% if service.image %}
+            <img src="{{ service.image.url }}" alt="{{ service.name }}" />
+            {% else %}
+            <img src="{% static 'img/service-image.png' %}" alt="{{ service.name }}" />
+            {% endif %}
+            </a>
+        </div>
+    </div>
+    <div class="pure-u-2-3">
+        <div class="l-box">
+            <h4 class="content-subhead"><a href="{{ service.get_absolute_url }}" title="">{{ service.name }}</a></h4>
+            {{ service.description|linebreaks }}
+        </div>
+    </div>
+</div>
+{% empty %}
+<br><br>
+<div class="pure-g-r content-ribbon">
+    <div class="pure-u-1">
+        <div class="l-box">
+            <p>Nenhum servicço ou produto está disponível na plataforma</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
